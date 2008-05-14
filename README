@@ -1,0 +1,30 @@
+Ack In Project:
+
+This is highly experimental right now and not for public consumption.
+
+The code is based on GrepInProject++ which was itself based on other's code as 
+below:
+
+# By Henrik Nyh &lt;http://henrik.nyh.se&gt; 2007-06-26
+# Free to modify and redistribute with credit.
+
+# Includes some minor modifications by Max &lt;http://max.xaok.org/webtek&gt; 2007-08-01
+# Adds search UI plus some minor modifications by Robert Thurnher &lt;http://soup.robert42.com&gt; 2007-08-11
+# Note: put GrepInProjectSearch.nib into /Applications/TextMate.app/Contents/SharedSupport/Support/nibs/
+# Further modifications by Trevor Squires 
+
+TODO:
+
+There's much to fix here.  Right now it's completely hobbled to do a case 
+sensitive search, demands that ack is in your search path, doesn't remember
+your dialog settings (they are disabled anyhow right now) or last search
+etc and last (but not least) displays a honking great output window when
+the dialog is visible.
+
+I've got fixes planned for all those to come in the next few days.
+
+I'm not inviting any patches right now because the overall layout of the
+source is going to drastically change pretty much immediately.
+
+So, if you're reading this, prepare yourself for the fact that stuff *will*
+change.

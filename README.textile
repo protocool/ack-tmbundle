@@ -22,7 +22,6 @@ The code is based on GrepInProject++ which was itself based on other's code as b
 
 # Includes some minor modifications by Max &lt;http://max.xaok.org/webtek&gt; 2007-08-01
 # Adds search UI plus some minor modifications by Robert Thurnher &lt;http://soup.robert42.com&gt; 2007-08-11
-# Note: put GrepInProjectSearch.nib into /Applications/TextMate.app/Contents/SharedSupport/Support/nibs/
 # Further modifications by Trevor Squires 
 </pre>
 

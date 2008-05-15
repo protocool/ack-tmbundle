@@ -250,7 +250,7 @@ html_footer
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@F</string>
+	<string>@A</string>
 	<key>name</key>
 	<string>Ack in Project</string>
 	<key>output</key>

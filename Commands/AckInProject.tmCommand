@@ -106,6 +106,8 @@ def bail(message)
   exit
 end
 
+ack_command = ENV['TM_ACK'] || 'ack'
+
 directory = ENV['TM_SELECTED_FILE'] || ENV['TM_PROJECT_DIRECTORY'] || 
             ( ENV['TM_FILEPATH'] &amp;&amp; File.dirname(ENV['TM_FILEPATH']) )
 
@@ -162,7 +164,7 @@ puts &lt;&lt;-HTML
 HTML
 
 # TODO: Respect ENV['TM_SELECTED_FILES']
-command = %{cd "#{directory}"; ack -H --nogroup --nocolor #{e_sh query}}
+command = %{cd "#{directory}"; #{ack_command} -H --nogroup --nocolor #{e_sh query}}
 
 IO.popen(command) do |pipe|
 

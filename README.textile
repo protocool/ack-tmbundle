@@ -12,6 +12,12 @@ cd ~/Library/Application\ Support/TextMate/Bundles
 git clone git://github.com/protocool/ack-tmbundle.git Ack.tmbundle
 </pre>
 
+<h2>Prerequisites</h2>
+
+Ack needs to be installed - see <a href="http://petdance.com/ack/">http://petdance.com/ack/</a> for instructions.
+
+If 'ack' isn't in your search path, set the TM_ACK environment variable to point to it (i.e. <code>/usr/local/bin/ack</code>)
+
 <h2>Background</h2>
 
 The code is based on GrepInProject++ which was itself based on other's code as below:
@@ -27,7 +33,7 @@ The code is based on GrepInProject++ which was itself based on other's code as b
 
 <h2>Outstanding issues</h2>
 
-There's much to fix here.  Right now it's completely hobbled to do a case sensitive search, demands that ack is in your search path, doesn't remember your dialog settings (they are disabled anyhow right now) or last search etc and last (but not least) displays a honking great output window when the dialog is visible.
+There's much to fix here.  Right now it's completely hobbled to do a case sensitive search, doesn't remember your dialog settings (they are disabled anyhow right now) or last search etc and last (but not least) displays a honking great output window when the dialog is visible.
 
 I've got fixes planned for all those to come in the next few days.
 

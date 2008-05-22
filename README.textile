@@ -1,7 +1,9 @@
 Ack Textmate Bundle.
-Version 0.0.0 (code named "leave me alone")
+Version 0.1
 
-This is highly experimental right now and not for public consumption.
+Type command-shift-a to ack your project in TextMate... 'nuff said.  
+
+You can learn more about ack at <a href="http://petdance.com/ack/">http://petdance.com/ack/</a>.
 
 <h2>Installation</h2>
 
@@ -14,9 +16,9 @@ git clone git://github.com/protocool/ack-tmbundle.git Ack.tmbundle
 
 <h2>Prerequisites</h2>
 
-Ack needs to be installed - see <a href="http://petdance.com/ack/">http://petdance.com/ack/</a> for instructions.
+The ack-standalone.sh script from <a href="http://petdance.com/ack/">http://petdance.com/ack/</a> is included in this bundle.  You can use a different version of ack by setting the TM_ACK environment variable to point to your version.
 
-If 'ack' isn't in your search path, set the TM_ACK environment variable to point to it (i.e. <code>/usr/local/bin/ack</code>)
+Note - this bundle has only been tested against this particular version of ack-standalone.
 
 <h2>Background</h2>
 
@@ -30,16 +32,3 @@ The code is based on GrepInProject++ which was itself based on other's code as b
 # Adds search UI plus some minor modifications by Robert Thurnher &lt;http://soup.robert42.com&gt; 2007-08-11
 # Further modifications by Trevor Squires 
 </pre>
-
-<h2>Outstanding issues</h2>
-
-There's much to fix here.  Right now it's completely hobbled to do a case sensitive search, doesn't remember your dialog settings (they are disabled anyhow right now) or last search etc and last (but not least) displays a honking great output window when the dialog is visible.
-
-I've got fixes planned for all those to come in the next few days.
-
-<h2>Contributing</h2>
-
-I'm not inviting any patches right now because the overall layout of the source is going to drastically change pretty much immediately.
-
-So, if you're reading this, prepare yourself for the fact that stuff *will* change.
-

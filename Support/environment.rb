@@ -25,7 +25,7 @@ module AckInProject
         %w{ui exit_codes}.each { |lib| require textmate_lib_file(lib) }
         
         self.bundle_support = File.expand_path(ENV['TM_BUNDLE_SUPPORT'])
-        self.ack = (ENV['TM_ACK'] || 'ack')
+        self.ack = (ENV['TM_ACK'] || support_file('ack-standalone.sh'))
       end
 
       def ghetto_include(to_include, target_binding)

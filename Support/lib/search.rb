@@ -87,7 +87,7 @@ class AckInProject::Search
     options << '-C' if result['showContext'] == 1
     options << "--#{result['followSymLinks'] == 1 ? '' : 'no'}follow"
     
-    %{cd #{e_sh search_directory}; #{ack} #{options.join(' ')} #{e_sh result['returnArgument']}}
+    %{cd #{e_sh search_directory}; #{e_sh ack} #{options.join(' ')} #{e_sh result['returnArgument']}}
   end
   
   def search

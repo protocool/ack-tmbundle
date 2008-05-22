@@ -25,10 +25,10 @@ Note - this bundle has only been tested against this particular version of ack-s
 The code is based on GrepInProject++ which was itself based on other's code as below:
 
 <pre>
-# By Henrik Nyh &lt;http://henrik.nyh.se&gt; 2007-06-26
+# By Henrik Nyh (http://henrik.nyh.se) 2007-06-26
 # Free to modify and redistribute with credit.
 
-# Includes some minor modifications by Max &lt;http://max.xaok.org/webtek&gt; 2007-08-01
-# Adds search UI plus some minor modifications by Robert Thurnher &lt;http://soup.robert42.com&gt; 2007-08-11
-# Further modifications by Trevor Squires 
+# Includes some minor modifications by Max (http://max.xaok.org/webtek) 2007-08-01
+# Adds search UI plus some minor modifications by Robert Thurnher (http://soup.robert42.com) 2007-08-11
+# Further modifications by Trevor Squires (http://somethinglearned.com) 2008-05-21
 </pre>

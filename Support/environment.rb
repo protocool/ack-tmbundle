@@ -1,3 +1,5 @@
+require 'base64'
+
 class Module
   # lifted from Rails
   def delegate(*methods)
@@ -76,12 +78,13 @@ module AckInProject
       end
     end
     
-    delegate :bundle_support, :ack, :support_file, :lib_file, :nib_file, 
+    delegate :bundle_support, :ack, :support_file, :lib_file, :nib_file, :project_directory, 
       :search_directory, :file_in_search_directory, :searched_in, :to => '::AckInProject::Environment'
   end
 
   class << self
     include Environment
+    AckInProject::Environment.ghetto_include %w(escape), binding
     
     def show_search_dialog(&block)
       require lib_file('search_dialog')
@@ -92,6 +95,30 @@ module AckInProject
       require lib_file('search_results')
       require lib_file('search')
       AckInProject::SearchResults.new(plist).show
+    end
+    
+    # sigh... defaults is giving me grief when searches contain quotes
+    def search_history
+      unless @search_history
+        history_command = "defaults read com.macromates.textmate ackHistory 2>/dev/null"
+        @search_history = OSX::PropertyList::load(Base64.decode64(%x{#{history_command}}))
+      end
+      @search_history
+    rescue
+      @search_history = [] # oh the humanity!
+    end
+    
+    def update_search_history(search)
+      search_history.unshift(search)
+      search_history.uniq!
+      search_history.compact!
+      search_history.replace search_history[0..9]
+
+      history = Base64.encode64(search_history.to_plist)
+
+      history_command = %Q|defaults write com.macromates.textmate ackHistory -string #{e_sh history} 2>/dev/null|
+      %x{#{history_command}}
+    rescue
     end
   end
 end

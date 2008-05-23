@@ -76,7 +76,7 @@ class AckInProject::Search
       gsub(/\e\[\d+m/,'</strong>')
   end
 
-  def search_command
+  def prepare_search
     # TODO: bail if the search term is empty
     result = plist['result']
     
@@ -86,12 +86,18 @@ class AckInProject::Search
     options << '-Q' if result['literalMatch'] == 1
     options << '-C' if result['showContext'] == 1
     options << "--#{result['followSymLinks'] == 1 ? '' : 'no'}follow"
-    
+    options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
+
+    AckInProject.update_search_history result['returnArgument']
+
     %{cd #{e_sh search_directory}; #{e_sh ack} #{options.join(' ')} #{e_sh result['returnArgument']}}
   end
   
   def search
-    IO.popen(search_command) do |pipe|
+    # tell ack about potential .ackrc files in the project directory
+    ENV['ACKRC'] = File.join(project_directory, '.ackrc')
+    
+    IO.popen(prepare_search) do |pipe|
       pipe.each do |line|
         case line
         when /^\s*$/

@@ -80,7 +80,7 @@ class AckInProject::Search
     # TODO: bail if the search term is empty
     result = plist['result']
     
-    options = %w(--group --color)
+    options = %w(--group --color --flush)
     options << '-w' if result['matchWholeWords'] == 1
     options << '-i' if result['ignoreCase'] == 1
     options << '-Q' if result['literalMatch'] == 1

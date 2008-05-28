@@ -17,6 +17,7 @@ class AckInProject::SearchResults
     puts <<-HTML
       <h2>Searching for “#{ h search_string }” in #{ searched_in }</h2>
       <div id="counters"><span id="linecount">0 lines</span> matched in <span id="filecount">0 files</span></div>
+      <script type="text/javascript">searchStarted();</script>
       <table id="results" width="100%" cellspacing="0">
     HTML
 
@@ -24,6 +25,7 @@ class AckInProject::SearchResults
 
     puts <<-HTML
       </table>
+      <script type="text/javascript">searchCompleted();</script>
     HTML
     html_footer
   end

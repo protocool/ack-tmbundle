@@ -111,6 +111,7 @@ class AckInProject::Search
         when /^--$/
           context_break
         end
+        $stdout.flush
       end
       section_end()
     end

@@ -1,6 +1,14 @@
-function matched(files, lines) {
-  document.getElementById('filecount').innerText = ('' + files).concat(' file').concat( (files == 1 ) ? '' : 's' );
-  document.getElementById('linecount').innerText = ('' + lines).concat(' line').concat( (lines == 1 ) ? '' : 's' );
+var foundFiles = 0;
+var foundLines = 0;
+
+function f() {
+  foundFiles += 1;
+  document.getElementById('filecount').innerText = ('' + foundFiles).concat(' file').concat( (foundFiles == 1 ) ? '' : 's' );
+}
+
+function l() {
+  foundLines += 1;
+  document.getElementById('linecount').innerText = ('' + foundLines).concat(' line').concat( (foundLines == 1 ) ? '' : 's' );
 }
 
 function searchStarted() {

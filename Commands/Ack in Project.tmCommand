@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
-	<key>bundleUUID</key>
-	<string>5A9D4FC6-6CBE-11D9-A21B-000D93589AF6</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby -rcgi
 require ENV['TM_BUNDLE_SUPPORT'] + '/environment.rb'
 AckInProject.show_search_dialog do |search_options|
   AckInProject.present_search(search_options)
-end
-</string>
+end</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
@@ -22,6 +19,6 @@ end
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>uuid</key>
-	<string>3B7E16C9-0D34-42D4-8431-06CB7D819655</string>
+	<string>E1966FE3-4B65-419A-85CA-4447BC63ECAD</string>
 </dict>
 </plist>

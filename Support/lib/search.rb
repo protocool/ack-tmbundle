@@ -89,6 +89,7 @@ class AckInProject::Search
     options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
 
     AckInProject.update_search_history result['returnArgument']
+    AckInProject.update_pbfind result['returnArgument']
 
     %{cd #{e_sh search_directory}; #{e_sh ack} #{options.join(' ')} #{e_sh result['returnArgument']}}
   end

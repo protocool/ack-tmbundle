@@ -120,6 +120,16 @@ module AckInProject
       %x{#{history_command}}
     rescue
     end
+    
+    def pbfind
+      @pbfind ||= %x[pbpaste -pboard find]
+    end
+    
+    def update_pbfind(search)
+      @pbfind = search
+      IO.popen('pbcopy -pboard find', 'w') {|pbcopy| pbcopy.write @pbfind}
+    end
+    
   end
 end
 

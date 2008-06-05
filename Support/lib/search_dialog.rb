@@ -25,10 +25,10 @@ class AckInProject::SearchDialog
   end
   
   def params
-    history = AckInProject::search_history
+    history = AckInProject.search_history
     {
       #'contentHeight' => 168,
-      'ackExpression' => history.first.to_s,
+      'ackExpression' => AckInProject.pbfind,
       'ackHistory' => history
     }
   end

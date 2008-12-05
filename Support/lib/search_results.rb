@@ -36,7 +36,7 @@ class AckInProject::SearchResults
   
   def header_extra
     <<-HTML
-      <link type="text/css" href="file://#{e_url support_file('search.css')}" />
+      <link type="text/css" rel="stylesheet" href="file://#{e_url support_file('search.css')}" />
       <script type="text/javascript" src="file://#{e_url support_file('search.js')}" charset="utf-8"></script>
     HTML
   end

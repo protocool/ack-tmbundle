@@ -5,11 +5,12 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby -rcgi
+	<string>${TM_RUBY:-/usr/bin/env ruby} &lt;&lt;"[RUBY]" -rcgi
 require ENV['TM_BUNDLE_SUPPORT'] + '/environment.rb'
 AckInProject.show_search_dialog do |search_options|
   AckInProject.present_search(search_options)
-end</string>
+end
+[RUBY]</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>

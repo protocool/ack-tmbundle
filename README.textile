@@ -1,6 +1,12 @@
 Ack Textmate Bundle.
 Version 0.1
 
+<h2>You should probably use AckMate instead...</h2>
+
+Users of Mac OS X 10.5 and above will have a *much* better expierence with "AckMate":http://github.com/protocool/AckMate (also authored by me). It eliminates many of this bundle's shortcomings.
+
+<h2>Usage</h2>
+
 Type command-shift-a to ack your project in TextMate... 'nuff said.  
 
 You can learn more about ack at <a href="http://petdance.com/ack/">http://petdance.com/ack/</a>.

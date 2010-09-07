@@ -1,4 +1,5 @@
 require 'base64'
+require 'plist'
 
 class Module
   # lifted from Rails

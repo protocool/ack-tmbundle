@@ -79,6 +79,10 @@ class AckInProject::Search
   def prepare_search
     # TODO: bail if the search term is empty
     result = plist['result']
+    # puts "***"
+    # puts result
+    # puts "***"
+    fileTypes = result['fileTypeString'].split(',') if result['fileTypeString']
     
     options = %w(--group --color --flush)
     options << '-w' if result['matchWholeWords'] == 1
@@ -87,11 +91,51 @@ class AckInProject::Search
     options << '-C' if result['showContext'] == 1
     options << "--#{result['followSymLinks'] == 1 ? '' : 'no'}follow"
     options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
+    if result['fileTypeString']
+      fileTypes.each do |f|
+        f = parse_filters(f)
+        options << "#{f}"
+      end
+    end
+    # options << " -G '\.css$' "
 
     AckInProject.update_search_history result['returnArgument']
     AckInProject.update_pbfind result['returnArgument']
+    AckInProject.update_search_filetype_filter result['fileTypeString'] || ''
 
     %{cd #{e_sh search_directory}; #{e_sh ack} #{options.join(' ')} -- #{e_sh result['returnArgument']}}
+  end
+  
+  def parse_filters(filter)
+    if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
+      " --#{filter} "
+    else
+      " -G '\.#{filter}' "
+    end
+    
+    # if filter
+    #   if  ['rb' ,'rhtml' ,'rjs' ,'rxml' ,'erb' ,'rake' ,'spec', 'ruby'].include?(filter)      
+    #     'ruby'        
+    #   elsif ['shell' ,'sh' ,'bash' ,'csh' ,'tcsh' ,'ksh' ,'zsh'].include?(filter)
+    #     'shell'
+    #   elsif ['Rakefiles' ,'rake'].include?(filter)
+    #     'rake'
+    #   elsif ['py' ,'python'].include?(filter)
+    #     'python'
+    #   elsif ['php' ,'phpt' ,'php3' ,'php4' ,'php5' ,'phtml'].include?(filter)
+    #     'php'
+    #   elsif ['js' ,'javascript'].include?(filter)
+    #     'js'
+    #   elsif ['htm' ,'html' ,'shtml' ,'xhtml'].include?(filter)
+    #     'html'
+    #   elsif ['xml' ,'dtd', 'xsl', 'xslt', 'ent'].include?(filter)
+    #     'xml'
+    #   elsif ['yaml' ,'yml'].include?(filter)
+    #     'yaml'  
+    #   else
+    #     filter
+    #   end
+    # end
   end
   
   def search

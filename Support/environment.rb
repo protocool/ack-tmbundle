@@ -130,6 +130,34 @@ module AckInProject
       IO.popen('pbcopy -pboard find', 'w') {|pbcopy| pbcopy.write @pbfind}
     end
     
+    def search_filetype_filter
+      
+      unless @search_filetype_filter
+        filetype_filter_command = "defaults read com.macromates.textmate fileTypeString 2>/dev/null"
+        @search_filetype_filter = OSX::PropertyList::load(Base64.decode64(%x{#{filetype_filter_command}}))        
+      end
+      # puts "**"
+      # puts @search_filetype_filter
+      # puts "|**"
+      @search_filetype_filter
+
+    rescue
+      @search_filetype_filter = [] # oh the humanity!
+    end
+    
+    def update_search_filetype_filter(filetype_filter)
+      search_filetype_filter = filetype_filter
+
+      filter_history = Base64.encode64(search_filetype_filter.to_plist)
+      # puts "**"
+      # puts filter_history
+      # puts "|**"
+
+      history_command = %Q|defaults write com.macromates.textmate fileTypeString -string #{e_sh filter_history} 2>/dev/null|
+      %x{#{history_command}}
+    rescue
+    end
+    
   end
 end
 

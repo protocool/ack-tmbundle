@@ -9,7 +9,7 @@ class AckInProject::SearchDialog
     
     command = %Q{#{TM_DIALOG} -cm -p #{e_sh params.to_plist} -d #{e_sh defaults.to_plist} #{e_sh nib_file('AckInProjectSearch.nib')}}
     plist = OSX::PropertyList::load(%x{#{command}})
-    # puts plist['result']
+
     if plist['result']
       block.call(plist)
     end
@@ -28,11 +28,8 @@ class AckInProject::SearchDialog
   def params
     history = AckInProject.search_history
     filetype_filter = AckInProject.search_filetype_filter
-    # puts "***"
-    # puts filetype_filter 
-    # puts "***"
     {
-      #'contentHeight' => 168,
+      #'contentHeight' => 150,
       'fileTypeString' => filetype_filter,
       'ackExpression' => AckInProject.pbfind,
       'ackHistory' => history

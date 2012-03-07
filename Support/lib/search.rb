@@ -4,7 +4,7 @@ class AckInProject::Search
   include AckInProject::Environment
   AckInProject::Environment.ghetto_include %w(escape), binding
 
-  attr_accessor :plist, :current_file, :lines_matched, :files_matched
+  attr_accessor :plist, :current_file, :lines_matched, :files_matched, :filter
   
   def initialize(plist)
     self.plist = plist;
@@ -90,12 +90,16 @@ class AckInProject::Search
     options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
     
     # add file type filters
+    
+    self.filter = ""
     if result['fileTypeString']
       fileTypes.each do |f|
         f = parse_filters(f)
-        options << "#{f}"
+        options << "#{f}" if f
       end
     end
+    puts self.filter
+    options << "-G #{self.filter}" if self.filter
 
     AckInProject.update_search_history result['returnArgument']
     AckInProject.update_pbfind result['returnArgument']
@@ -110,7 +114,7 @@ class AckInProject::Search
     if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
       " --#{filter} "
     else
-      " -G '\.#{filter}' "
+      self.filter << "\.#{filter}$|"
     end        
   end
   

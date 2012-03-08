@@ -93,11 +93,12 @@ class AckInProject::Search
     self.filter = ""
     if result['fileTypeString']
       fileTypes.each do |f|
+        f = f.gsub(/\s+/, "")
         f = parse_filters(f)
         # options << "#{f}" if f != self.filter
       end
     end
-    
+
     options << "-G '#{self.filter[0..self.filter.length-2]}'" if self.filter != ""
 
     AckInProject.update_search_history result['returnArgument']
@@ -114,7 +115,7 @@ class AckInProject::Search
     # if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
     #       " --#{filter} "
     #     else
-      self.filter << "\.#{filter}$|"
+      self.filter << "\\.#{filter}$|"
     # end        
   end
   

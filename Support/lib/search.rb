@@ -89,17 +89,16 @@ class AckInProject::Search
     options << "--#{result['followSymLinks'] == 1 ? '' : 'no'}follow"
     options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
     
-    # add file type filters
-    
+    # add file type filters    
     self.filter = ""
     if result['fileTypeString']
       fileTypes.each do |f|
         f = parse_filters(f)
-        options << "#{f}" if f
+        # options << "#{f}" if f != self.filter
       end
     end
-    puts self.filter
-    options << "-G #{self.filter}" if self.filter
+    
+    options << "-G '#{self.filter[0..self.filter.length-2]}'" if self.filter != ""
 
     AckInProject.update_search_history result['returnArgument']
     AckInProject.update_pbfind result['returnArgument']
@@ -109,13 +108,14 @@ class AckInProject::Search
   end
   
   # check to see it's a big filter or small filter
+  # update: only support small filter
   # TODO: add more types support
   def parse_filters(filter)
-    if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
-      " --#{filter} "
-    else
+    # if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
+    #       " --#{filter} "
+    #     else
       self.filter << "\.#{filter}$|"
-    end        
+    # end        
   end
   
   def search

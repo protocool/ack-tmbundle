@@ -4,7 +4,7 @@ class AckInProject::Search
   include AckInProject::Environment
   AckInProject::Environment.ghetto_include %w(escape), binding
 
-  attr_accessor :plist, :current_file, :lines_matched, :files_matched
+  attr_accessor :plist, :current_file, :lines_matched, :files_matched, :filter
   
   def initialize(plist)
     self.plist = plist;
@@ -79,6 +79,7 @@ class AckInProject::Search
   def prepare_search
     # TODO: bail if the search term is empty
     result = plist['result']
+    fileTypes = result['fileTypeString'].split(',') if result['fileTypeString']
     
     options = %w(--group --color --flush)
     options << '-w' if result['matchWholeWords'] == 1
@@ -87,11 +88,35 @@ class AckInProject::Search
     options << '-C' if result['showContext'] == 1
     options << "--#{result['followSymLinks'] == 1 ? '' : 'no'}follow"
     options << "--#{result['loadAckRC'] == 1 ? '' : 'no'}env"
+    
+    # add file type filters    
+    self.filter = ""
+    if result['fileTypeString']
+      fileTypes.each do |f|
+        f = f.gsub(/\s+/, "")
+        f = parse_filters(f)
+        # options << "#{f}" if f != self.filter
+      end
+    end
+
+    options << "-G '#{self.filter[0..self.filter.length-2]}'" if self.filter != ""
 
     AckInProject.update_search_history result['returnArgument']
     AckInProject.update_pbfind result['returnArgument']
+    AckInProject.update_search_filetype_filter result['fileTypeString'] || ''
 
     %{cd #{e_sh search_directory}; #{e_sh ack} #{options.join(' ')} -- #{e_sh result['returnArgument']}}
+  end
+  
+  # check to see it's a big filter or small filter
+  # update: only support small filter
+  # TODO: add more types support
+  def parse_filters(filter)
+    # if ['ruby', 'shell', 'rake', 'php', 'html', 'xml', 'yaml'].include?(filter)
+    #       " --#{filter} "
+    #     else
+      self.filter << "\\.#{filter}$|"
+    # end        
   end
   
   def search
